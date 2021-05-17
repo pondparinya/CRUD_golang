@@ -16,7 +16,7 @@ func NewHTTP(g *echo.Group, sv services.IServicesCRUD) {
 	h := &HTTP{
 		Service: sv,
 	}
-	g.GET("", h.HTTP_Create)
+	g.POST("", h.HTTP_Create)
 
 }
 

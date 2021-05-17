@@ -23,7 +23,7 @@ func NewMongoDB() *MongoDB {
 	defer cancel()
 
 	// Your URI MongoDB
-	option := options.Client().ApplyURI("mongodb+srv://ecommerce:myFirstDatabase@cluster0.idq5h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+	option := options.Client().ApplyURI("mongodb+srv://ecommerce:ecommerce@cluster0.idq5h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 	client, err0 := mongo.Connect(ctx, option)
 	if err0 != nil {

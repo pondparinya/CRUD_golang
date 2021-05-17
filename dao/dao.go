@@ -5,7 +5,7 @@ type StudentDAO struct {
 	Name      string   `json:"name"`
 	Nickname  string   `json:"nickname"`
 	Age       int      `json:"age"`
-	Address   *AddressDAO `json:"address"`
+	Address   AddressDAO `json:"address"`
 }
 
 type AddressDAO struct {

@@ -17,6 +17,8 @@ func (sv ServicesCRUD) Create(ctx context.Context, d dao.StudentDAO) (string, er
 		Address: &entity.AddressEntity{
 			StreetAddress:  d.Address.StreetAddress,
 			StreetAddress2: d.Address.StreetAddress2,
+			State:          d.Address.State,
+			Zipcode:        d.Address.Zipcode,
 			City:           d.Address.City,
 			Country:        d.Address.City,
 		},
