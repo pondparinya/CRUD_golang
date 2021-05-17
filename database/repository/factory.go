@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/pondparinya/CRUD_golang/database/datasources"
+	"github.com/pondparinya/CRUD_golang/database/entity"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -12,13 +13,15 @@ type Repository struct {
 }
 
 type IRepository interface {
+	InsertStudent(ctx context.Context, ent entity.StudentEntity) (*mongo.InsertOneResult, error)
 }
 
 func NewRepository(ds *datasources.MongoDB) IRepository {
-	return Repository{
-		Collection: ds.MongoDB.Database("Database Name").Collection("Collection Name"),
+	return &Repository{
+		Collection: ds.MongoDB.Database("Test").Collection("student"),
 	}
 }
 
-
-func InsertStudent(ctx context.Context , )
+func (repo Repository) InsertStudent(ctx context.Context, ent entity.StudentEntity) (*mongo.InsertOneResult, error) {
+	return repo.Collection.InsertOne(ctx, &ent)
+}
