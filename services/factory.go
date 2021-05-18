@@ -12,9 +12,10 @@ type ServicesCRUD struct {
 }
 
 type IServicesCRUD interface {
-	CreateStudent(ctx context.Context, d dao.StudentDAO) (dao.StudentDAO, error)
-	GetAllStudent(ctx context.Context) ([]dao.StudentDAO, error)
-	FindByStudentID(ctx context.Context, student_id int) (*dao.StudentDAO, error)
+	CreateStudent(ctx context.Context, d *dao.CreateStudentDAO) (*dao.CreateStudentResDAO, error)
+	GetAllStudent(ctx context.Context) ([]*dao.GetStudentResDAO, error)
+	FindByStudentID(ctx context.Context, student_id int) (*dao.GetStudentResDAO, error)
+	UpdateStudentByID(ctx context.Context, d *dao.GetStudentResDAO) error
 }
 
 func NewServuceCRUD(repo repository.IRepository) IServicesCRUD {

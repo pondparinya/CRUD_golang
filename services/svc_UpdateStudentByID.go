@@ -8,8 +8,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func (sv ServicesCRUD) CreateStudent(ctx context.Context, d *dao.CreateStudentDAO) (*dao.CreateStudentResDAO, error) {
+func (sv ServicesCRUD) UpdateStudentByID(ctx context.Context, d *dao.GetStudentResDAO) error {
+	id, err := primitive.ObjectIDFromHex(d.ID)
 	ent := &entity.StudentEntity{
+		ID:        id,
 		StudentID: d.StudentID,
 		Name:      d.Name,
 		Nickname:  d.Nickname,
@@ -20,15 +22,13 @@ func (sv ServicesCRUD) CreateStudent(ctx context.Context, d *dao.CreateStudentDA
 			State:          d.Address.State,
 			Zipcode:        d.Address.Zipcode,
 			City:           d.Address.City,
-			Country:        d.Address.City,
+			Country:        d.Address.Country,
 		},
 	}
-	r, err := sv.Repo.InsertStudent(ctx, ent)
+
+	_, err = sv.Repo.UpdateStudent(ctx, ent)
 	if err != nil {
-		return &dao.CreateStudentResDAO{}, err
+		return err
 	}
-	id := r.InsertedID.(primitive.ObjectID).Hex()
-	return &dao.CreateStudentResDAO{
-		ID: id,
-	}, err
+	return err
 }

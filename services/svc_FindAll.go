@@ -6,14 +6,14 @@ import (
 	"github.com/pondparinya/CRUD_golang/dao"
 )
 
-func (sv ServicesCRUD) GetAllStudent(ctx context.Context) ([]dao.StudentDAO, error) {
-	Res := make([]dao.StudentDAO, 0)
+func (sv ServicesCRUD) GetAllStudent(ctx context.Context) ([]*dao.GetStudentResDAO, error) {
+	Res := make([]*dao.GetStudentResDAO, 0)
 	res, err := sv.Repo.FindAllStudent(ctx)
 	if err != nil {
-		return []dao.StudentDAO{}, err
+		return []*dao.GetStudentResDAO{}, err
 	}
 	for _, r := range *res {
-		data := dao.StudentDAO{
+		data := &dao.GetStudentResDAO{
 			ID:        r.ID.Hex(),
 			StudentID: r.StudentID,
 			Name:      r.Name,

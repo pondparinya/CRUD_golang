@@ -9,26 +9,26 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-func (sv HTTP) HTTP_Create(c echo.Context) error {
+func (sv HTTP) UpdateStudent(c echo.Context) error {
 	ctx := c.Request().Context()
-	r := new(dao.CreateStudentDAO)
+	r := new(dao.GetStudentResDAO)
 	if err := c.Bind(r); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{
 			"error": err.Error(),
 		})
 	}
-
 	var Errors []string
 	if err := c.Validate(r); err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
-			err := fmt.Sprintf("Error invalid parameter (%v)", err.Field())
+			err := fmt.Sprintf("Error Invalid parameter (%v)", err.Field())
 			Errors = append(Errors, err)
 		}
 		return c.JSON(http.StatusBadRequest, map[string][]string{
 			"error": Errors,
 		})
 	}
-	res, err := sv.Service.CreateStudent(ctx, &dao.CreateStudentDAO{
+	err := sv.Service.UpdateStudentByID(ctx, &dao.GetStudentResDAO{
+		ID:        r.ID,
 		StudentID: r.StudentID,
 		Name:      r.Name,
 		Nickname:  r.Nickname,
@@ -36,9 +36,7 @@ func (sv HTTP) HTTP_Create(c echo.Context) error {
 		Address:   r.Address,
 	})
 	if err != nil {
-		return c.JSON(http.StatusUnprocessableEntity, map[string]string{
-			"error": err.Error(),
-		})
+		return c.JSON(http.StatusUnprocessableEntity, map[string]string{"error": err.Error()})
 	}
-	return c.JSON(201, res)
+	return c.JSON(200, map[string]string{"message": "Update complete"})
 }

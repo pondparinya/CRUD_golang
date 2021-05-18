@@ -16,5 +16,6 @@ func NewHTTP(g *echo.Group, sv services.IServicesCRUD) {
 	g.POST("", h.HTTP_Create)
 	g.GET("", h.GetAll)
 	g.GET("student", h.FindByStudentID)
+	g.PUT("student", h.UpdateStudent)
 
 }
