@@ -1,6 +1,7 @@
 package dao
 
 type StudentDAO struct {
+	ID        string     `json:"_id"`
 	StudentID int        `json:"student_id" validate:"required"`
 	Name      string     `json:"name" validate:"required"`
 	Nickname  string     `json:"nickname,omitempty"`
@@ -8,9 +9,6 @@ type StudentDAO struct {
 	Address   AddressDAO `json:"address" validate:"dive"`
 }
 
-type StudentResponse struct {
-	ID string `json:"_id"`
-}
 
 type AddressDAO struct {
 	StreetAddress  string `json:"streetAddress"`

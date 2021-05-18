@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func (sv ServicesCRUD) CreateStudent(ctx context.Context, d dao.StudentDAO) (dao.StudentResponse, error) {
+func (sv ServicesCRUD) CreateStudent(ctx context.Context, d dao.StudentDAO) (dao.StudentDAO, error) {
 	ent := entity.StudentEntity{
 		StudentID: d.StudentID,
 		Name:      d.Name,
@@ -25,10 +25,10 @@ func (sv ServicesCRUD) CreateStudent(ctx context.Context, d dao.StudentDAO) (dao
 	}
 	r, err := sv.Repo.InsertStudent(ctx, ent)
 	if err != nil {
-		return dao.StudentResponse{}, err
+		return dao.StudentDAO{}, err
 	}
 	id := r.InsertedID.(primitive.ObjectID).Hex()
-	return dao.StudentResponse{
+	return dao.StudentDAO{
 		ID: id,
 	}, err
 }

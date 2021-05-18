@@ -14,6 +14,7 @@ func (sv ServicesCRUD) GetAllStudent(ctx context.Context) ([]dao.StudentDAO, err
 	}
 	for _, r := range *res {
 		data := dao.StudentDAO{
+			ID:        r.ID.Hex(),
 			StudentID: r.StudentID,
 			Name:      r.Name,
 			Nickname:  r.Nickname,
@@ -29,5 +30,6 @@ func (sv ServicesCRUD) GetAllStudent(ctx context.Context) ([]dao.StudentDAO, err
 		}
 		Res = append(Res, data)
 	}
+
 	return Res, err
 }

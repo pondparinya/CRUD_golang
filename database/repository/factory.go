@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/pondparinya/CRUD_golang/database/datasources"
 	"github.com/pondparinya/CRUD_golang/database/entity"
@@ -17,6 +18,7 @@ type Repository struct {
 type IRepository interface {
 	InsertStudent(ctx context.Context, ent entity.StudentEntity) (*mongo.InsertOneResult, error)
 	FindAllStudent(ctx context.Context) (*[]entity.StudentEntity, error)
+	FindByStudentID(ctx context.Context, studentID int) (*entity.StudentEntity, error)
 }
 
 func NewRepository(ds *datasources.MongoDB) IRepository {
@@ -50,4 +52,12 @@ func (repo Repository) FindAllStudent(ctx context.Context) (*[]entity.StudentEnt
 
 	// }
 
+}
+
+func (repo Repository) FindByStudentID(ctx context.Context, studentID int) (*entity.StudentEntity, error) {
+	var ent *entity.StudentEntity
+	filter := bson.M{"student_id": studentID}
+	err := repo.Collection.FindOne(ctx, filter).Decode(&ent)
+	fmt.Println(ent)
+	return ent, err
 }

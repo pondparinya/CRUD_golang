@@ -1,11 +1,14 @@
 package entity
 
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
 type StudentEntity struct {
-	StudentID int            `json:"student_id" bson:"student_id"`
-	Name      string         `json:"name" bson:"name,omitempty"`
-	Nickname  string         `json:"nickname" bson:"nickname"`
-	Age       int            `json:"age" bson:"age"`
-	Address   *AddressEntity `json:"address" bson:"address"`
+	ID        primitive.ObjectID `json:"_id" bson:"_id"`
+	StudentID int                `json:"student_id" bson:"student_id"`
+	Name      string             `json:"name" bson:"name,omitempty"`
+	Nickname  string             `json:"nickname" bson:"nickname"`
+	Age       int                `json:"age" bson:"age"`
+	Address   *AddressEntity     `json:"address" bson:"address"`
 }
 
 type AddressEntity struct {
