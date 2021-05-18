@@ -12,7 +12,7 @@ type ServicesCRUD struct {
 }
 
 type IServicesCRUD interface {
-	Create(ctx context.Context, d dao.StudentDAO) (string, error)
+	CreateStudent(ctx context.Context, d dao.StudentDAO) (string, error)
 }
 
 func NewServuceCRUD(repo repository.IRepository) IServicesCRUD {

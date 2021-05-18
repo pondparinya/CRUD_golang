@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func (sv ServicesCRUD) Create(ctx context.Context, d dao.StudentDAO) (string, error) {
+func (sv ServicesCRUD) CreateStudent(ctx context.Context, d dao.StudentDAO) (string, error) {
 	ent := entity.StudentEntity{
 		StudentID: d.StudentID,
 		Name:      d.Name,
