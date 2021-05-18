@@ -8,6 +8,10 @@ type StudentDAO struct {
 	Address   AddressDAO `json:"address" validate:"dive"`
 }
 
+type StudentResponse struct {
+	ID string `json:"_id"`
+}
+
 type AddressDAO struct {
 	StreetAddress  string `json:"streetAddress"`
 	StreetAddress2 string `json:"streetAddress2"`

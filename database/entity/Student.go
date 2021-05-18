@@ -2,7 +2,7 @@ package entity
 
 type StudentEntity struct {
 	StudentID int            `json:"student_id" bson:"student_id"`
-	Name      string         `json:"name" bson:"name"`
+	Name      string         `json:"name" bson:"name,omitempty"`
 	Nickname  string         `json:"nickname" bson:"nickname"`
 	Age       int            `json:"age" bson:"age"`
 	Address   *AddressEntity `json:"address" bson:"address"`
