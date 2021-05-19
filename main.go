@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/labstack/echo/v4"
 	"github.com/pondparinya/CRUD_golang/database/datasources"
 	"github.com/pondparinya/CRUD_golang/database/repository"
@@ -21,7 +23,7 @@ func main() {
 	e := echo.New()
 
 	// Set echo with validator
-	e.Validator = &RequestValidator{ Validator: validator.New(), }
+	e.Validator = &RequestValidator{Validator: validator.New()}
 	db := datasources.NewMongoDB()
 	repo := repository.NewRepository(db)
 	sv := services.NewServuceCRUD(repo)
@@ -30,6 +32,6 @@ func main() {
 
 	gateways.NewHTTP(routG, sv)
 
-	e.Logger.Fatal(e.Start(":3000"))
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 
 }
