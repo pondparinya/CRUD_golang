@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func (sv ServicesCRUD) UpdateStudentByID(ctx context.Context, d *dao.GetStudentResDAO) error {
+func (sv ServicesCRUD) UpdateStudentByID(ctx context.Context, d *dao.GetStudentRes) error {
 	id, err := primitive.ObjectIDFromHex(d.ID)
 	ent := &entity.StudentEntity{
 		ID:        id,

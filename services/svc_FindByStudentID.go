@@ -6,12 +6,12 @@ import (
 	"github.com/pondparinya/CRUD_golang/dao"
 )
 
-func (sv ServicesCRUD) FindByStudentID(ctx context.Context, student_id int) (*dao.GetStudentResDAO, error) {
+func (sv ServicesCRUD) FindByStudentID(ctx context.Context, student_id string) (*dao.GetStudentRes, error) {
 	r, err := sv.Repo.FindByStudentID(ctx, student_id)
 	if err != nil {
-		return &dao.GetStudentResDAO{}, err
+		return &dao.GetStudentRes{}, err
 	}
-	res := &dao.GetStudentResDAO{
+	res := &dao.GetStudentRes{
 		ID:        r.ID.Hex(),
 		StudentID: r.StudentID,
 		Name:      r.Name,

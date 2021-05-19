@@ -11,7 +11,7 @@ import (
 
 func (sv HTTP) UpdateStudent(c echo.Context) error {
 	ctx := c.Request().Context()
-	r := new(dao.GetStudentResDAO)
+	r := new(dao.GetStudentRes)
 	if err := c.Bind(r); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{
 			"error": err.Error(),
@@ -27,7 +27,7 @@ func (sv HTTP) UpdateStudent(c echo.Context) error {
 			"error": Errors,
 		})
 	}
-	err := sv.Service.UpdateStudentByID(ctx, &dao.GetStudentResDAO{
+	err := sv.Service.UpdateStudentByID(ctx, &dao.GetStudentRes{
 		ID:        r.ID,
 		StudentID: r.StudentID,
 		Name:      r.Name,

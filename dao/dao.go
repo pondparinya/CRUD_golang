@@ -1,22 +1,26 @@
 package dao
 
-type CreateStudentDAO struct {
-	StudentID int        `json:"student_id" validate:"required"`
+type CreateStudentReq struct {
+	StudentID string     `json:"student_id" validate:"required"`
 	Name      string     `json:"name" validate:"required"`
 	Nickname  string     `json:"nickname,omitempty"`
-	Age       int        `json:"age" validate:"required"`
+	Age       string     `json:"age" validate:"required"`
 	Address   AddressDAO `json:"address" validate:"dive"`
 }
-type CreateStudentResDAO struct {
+type CreateStudentRes struct {
 	ID string `json:"_id"`
 }
-type GetStudentResDAO struct {
+type GetStudentRes struct {
 	ID        string     `json:"_id"`
-	StudentID int        `json:"student_id,omitempty" validate:"required"`
+	StudentID string     `json:"student_id,omitempty" validate:"required"`
 	Name      string     `json:"name,omitempty" validate:"required"`
 	Nickname  string     `json:"nickname,omitempty"`
-	Age       int        `json:"age,omitempty" validate:"required"`
+	Age       string     `json:"age,omitempty" validate:"required"`
 	Address   AddressDAO `json:"address,omitempty" validate:"dive"`
+}
+
+type DeleteStudentReq struct {
+	StudentID string `json:"student_id" validate:"required"`
 }
 
 type AddressDAO struct {

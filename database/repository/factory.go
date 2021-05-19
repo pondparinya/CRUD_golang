@@ -18,8 +18,9 @@ type Repository struct {
 type IRepository interface {
 	InsertStudent(ctx context.Context, ent *entity.StudentEntity) (*mongo.InsertOneResult, error)
 	FindAllStudent(ctx context.Context) (*[]entity.StudentEntity, error)
-	FindByStudentID(ctx context.Context, studentID int) (*entity.StudentEntity, error)
+	FindByStudentID(ctx context.Context, studentID string) (*entity.StudentEntity, error)
 	UpdateStudent(ctx context.Context, ent *entity.StudentEntity) (*mongo.UpdateResult, error)
+	DeleteByStudentID(ctx context.Context, StudentID string) *mongo.SingleResult
 }
 
 func NewRepository(ds *datasources.MongoDB) IRepository {
@@ -42,24 +43,12 @@ func (repo Repository) FindAllStudent(ctx context.Context) (*[]entity.StudentEnt
 	var ent []entity.StudentEntity
 	err = cur.All(ctx, &ent)
 	return &ent, err
-	// res := make([]entity.StudentEntity, 0)
-	// for cur.Next(ctx) {
-	// 	var item entity.StudentEntity
-	// 	err := cur.Decode(&item)
-	// 	if err != nil {
-	// 		continue
-	// 	}
-	// 	res = append(res, item)
-
-	// }
-
 }
 
-func (repo Repository) FindByStudentID(ctx context.Context, studentID int) (*entity.StudentEntity, error) {
+func (repo Repository) FindByStudentID(ctx context.Context, studentID string) (*entity.StudentEntity, error) {
 	var ent *entity.StudentEntity
 	filter := bson.M{"student_id": studentID}
 	err := repo.Collection.FindOne(ctx, filter).Decode(&ent)
-	fmt.Println(ent)
 	return ent, err
 }
 
@@ -77,4 +66,9 @@ func (repo Repository) UpdateStudent(ctx context.Context, ent *entity.StudentEnt
 		},
 		},
 	)
+}
+
+func (repo Repository) DeleteByStudentID(ctx context.Context, StudentID string) *mongo.SingleResult {
+	filter := bson.M{"student_id": StudentID}
+	return  repo.Collection.FindOneAndDelete(ctx, filter)
 }

@@ -11,7 +11,7 @@ import (
 
 func (sv HTTP) HTTP_Create(c echo.Context) error {
 	ctx := c.Request().Context()
-	r := new(dao.CreateStudentDAO)
+	r := new(dao.CreateStudentReq)
 	if err := c.Bind(r); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{
 			"error": err.Error(),
@@ -28,7 +28,7 @@ func (sv HTTP) HTTP_Create(c echo.Context) error {
 			"error": Errors,
 		})
 	}
-	res, err := sv.Service.CreateStudent(ctx, &dao.CreateStudentDAO{
+	res, err := sv.Service.CreateStudent(ctx, &dao.CreateStudentReq{
 		StudentID: r.StudentID,
 		Name:      r.Name,
 		Nickname:  r.Nickname,

@@ -4,10 +4,10 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type StudentEntity struct {
 	ID        primitive.ObjectID `json:"_id" bson:"_id,omitempty"`
-	StudentID int                `json:"student_id" bson:"student_id,omitempty"`
+	StudentID string             `json:"student_id" bson:"student_id,omitempty"`
 	Name      string             `json:"name" bson:"name,omitempty"`
 	Nickname  string             `json:"nickname" bson:"nickname,omitempty"`
-	Age       int                `json:"age" bson:"age,omitempty"`
+	Age       string                `json:"age" bson:"age,omitempty"`
 	Address   *AddressEntity     `json:"address" bson:"address,omitempty"`
 }
 
