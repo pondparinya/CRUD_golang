@@ -7,7 +7,7 @@ type StudentEntity struct {
 	StudentID string             `json:"student_id" bson:"student_id,omitempty"`
 	Name      string             `json:"name" bson:"name,omitempty"`
 	Nickname  string             `json:"nickname" bson:"nickname,omitempty"`
-	Age       string                `json:"age" bson:"age,omitempty"`
+	Age       string             `json:"age" bson:"age,omitempty"`
 	Address   *AddressEntity     `json:"address" bson:"address,omitempty"`
 }
 
@@ -19,3 +19,4 @@ type AddressEntity struct {
 	Zipcode        string `json:"zipcode" bson:"zipcode,omitempty"`
 	Country        string `json:"country" bson:"country,omitempty"`
 }
+

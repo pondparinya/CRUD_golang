@@ -7,6 +7,7 @@ import (
 	"github.com/pondparinya/CRUD_golang/database/datasources"
 	"github.com/pondparinya/CRUD_golang/database/entity"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -19,6 +20,7 @@ type IRepository interface {
 	InsertStudent(ctx context.Context, ent *entity.StudentEntity) (*mongo.InsertOneResult, error)
 	FindAllStudent(ctx context.Context) (*[]entity.StudentEntity, error)
 	FindByStudentID(ctx context.Context, studentID string) (*entity.StudentEntity, error)
+	FindByID(ctx context.Context, ID primitive.ObjectID) (*entity.StudentEntity, error)
 	UpdateStudent(ctx context.Context, ent *entity.StudentEntity) (*mongo.UpdateResult, error)
 	DeleteByStudentID(ctx context.Context, StudentID string) *mongo.SingleResult
 }
@@ -71,4 +73,10 @@ func (repo Repository) UpdateStudent(ctx context.Context, ent *entity.StudentEnt
 func (repo Repository) DeleteByStudentID(ctx context.Context, StudentID string) *mongo.SingleResult {
 	filter := bson.M{"student_id": StudentID}
 	return repo.Collection.FindOneAndDelete(ctx, filter)
+}
+
+func (repo Repository) FindByID(ctx context.Context, ID primitive.ObjectID) (*entity.StudentEntity, error) {
+	var ent *entity.StudentEntity
+	err := repo.Collection.FindOne(ctx, bson.M{"_id": ID}).Decode(&ent)
+	return ent, err
 }
