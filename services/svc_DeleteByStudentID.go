@@ -8,8 +8,10 @@ import (
 
 func (sv ServicesCRUD) DeleteByStudentID(ctx context.Context, d *dao.DeleteStudentReq) error {
 	err := sv.Repo.DeleteByStudentID(ctx, d.StudentID)
-	if err.Err().Error() == "mongo: no documents in result" {
-		return err.Err()
+	if err.Err() != nil {
+		if err.Err().Error() == "mongo: no documents in result" {
+			return err.Err()
+		}
 	}
-	return nil
+	return err.Err()
 }

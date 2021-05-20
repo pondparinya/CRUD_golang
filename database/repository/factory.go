@@ -70,5 +70,5 @@ func (repo Repository) UpdateStudent(ctx context.Context, ent *entity.StudentEnt
 
 func (repo Repository) DeleteByStudentID(ctx context.Context, StudentID string) *mongo.SingleResult {
 	filter := bson.M{"student_id": StudentID}
-	return  repo.Collection.FindOneAndDelete(ctx, filter)
+	return repo.Collection.FindOneAndDelete(ctx, filter)
 }
