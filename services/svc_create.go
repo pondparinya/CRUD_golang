@@ -6,7 +6,6 @@ import (
 
 	"github.com/pondparinya/CRUD_golang/dao"
 	"github.com/pondparinya/CRUD_golang/database/entity"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func (sv ServicesCRUD) CreateStudent(ctx context.Context, d *dao.CreateStudentReq) (*dao.CreateStudentRes, error) {
@@ -29,12 +28,9 @@ func (sv ServicesCRUD) CreateStudent(ctx context.Context, d *dao.CreateStudentRe
 			Country:        d.Address.City,
 		},
 	}
-	r, err := sv.Repo.InsertStudent(ctx, ent)
+	_, err := sv.Repo.InsertStudent(ctx, ent)
 	if err != nil {
 		return &dao.CreateStudentRes{}, err
 	}
-	id := r.InsertedID.(primitive.ObjectID).Hex()
-	return &dao.CreateStudentRes{
-		ID: id,
-	}, err
+	return &dao.CreateStudentRes{}, fmt.Errorf("error")
 }

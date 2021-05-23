@@ -27,7 +27,7 @@ type IRepository interface {
 
 func NewRepository(ds *datasources.MongoDB) IRepository {
 	return &Repository{
-		Collection: ds.MongoDB.Database("Test").Collection("student"),
+		Collection: ds.MongoDB.Database("DATABASE_NAME").Collection("COLLECTION_NAME"),
 	}
 }
 
