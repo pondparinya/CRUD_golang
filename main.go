@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/labstack/echo/v4"
@@ -32,6 +33,7 @@ func main() {
 
 	gateways.NewHTTP(routG, sv)
 
+	fmt.Println("A")
 	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 
 }
