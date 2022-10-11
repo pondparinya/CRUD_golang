@@ -12,6 +12,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+//go:generate mockgen -source factory.go -package repository -destination factory_mock.go
+
 type Repository struct {
 	Collection *mongo.Collection
 }
